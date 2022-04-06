@@ -1,70 +1,27 @@
-# Getting Started with Create React App
+# Simple Firebase Authentication Practice
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### Authentication: কাউকে কোনো কিছু, কারো কোনো Act (যা সঠিক বলে দাবী করা হচ্ছে) প্রকৃতপক্ষে তা সত্য কিনা নির্ণয় করার প্রক্রিয়া (Giving Assurance)
 
-## Available Scripts
+#### Authorization: কাউকে কোনো কাজ করার জন্য বা কোনো resource ব্যবহার করতে পারার permision দেওয়ার প্রক্রিয়া।
 
-In the project directory, you can run:
+#### Encryption: কোনো তথ্যকে (text, image, file, credentials etc) অনেক সুরক্ষিত করার জন্য (saving from hackers) সেই তথ্যের Original Representation কে different representation এর মাধ্যমে প্রকাশ করা।
 
-### `npm start`
+#### Okta, Firebase ব্যবহার করে ইউজার অথেন্টিকেশন করা যায়।
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### Firebase Authentication সার্ভিস ইউজ করার নিয়ম
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- console.firebase.google.com এ গিয়ে প্রজেক্ট ক্রিয়েট করতে হবে
+- Web এর জন্য Register App এ গিয়ে রেজিস্টার করতে হবে
+- npm install firebase কমান্ড দিয়ে এক্সিস্টিং রিয়েক্ট প্রজেক্টে firebase SDK install করতে হবে।
+- Firebase App Initialize করার জন্য Firebase Config কোড কপি করে একটা কনফিগ ফাইল ক্রিয়েট করতে হবে (firebase.init.js অথবা অন্য নামে) । export default app; দিয়ে app কে এক্সপোর্ট করতে হবে। পরে তা ব্যবহারের জন্য অন্য কম্পোনেন্টে ইম্পোর্ট করতে হবে।
+- App.js কমপোনেন্টে ইউজ করার জন্য app ইম্পোর্ট করে getAuth(app) কল করে auth সেট করতে হবে।
+- Firebase > Build > Authentication > Sign-in-Method থেকে যে প্রোভাইডারের Authentication সার্ভিস নিতে চাই সেটা Enable করতে হবে।
+- Enable করা প্রোভাইডারকে প্রজেক্টে আমাদের পোভাইডার হিসেবে সেট করার জন্য App.js এ প্রোভাইডার সেট করার ফাংশন কল দিতে হবে । যেমনঃ const providerr = new GoogleAuthProvider();
+- তারপর ওয়েবসাইটে কোনো বাটন ক্লিকে পপ আপ ওপেন করে সাইন ইন করানোর জন্য অই বাটনে একটা Event Handler এড করে Event Handler এর ভিতর signInWithPopup(auth, provider) কল করে .then(res => {}) দিয়ে ইউজার এর ইনফরমেশন পাওয়া যাবে এবং তা প্রয়োজন মতো UI তে দেখিয়ে Authentication কমপ্লিট করা যাবে। ইউজার Authentication করতে সক্ষম না হলে বা কোনো এরর হলে সেটাকে .catch(err => {}) দিয়ে Handle করতে হবে।
+- Sign Out করার জন্য signOut(auth) কল করতে হবে।
 
-### `npm test`
+#### SDK - Software Development Kit
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- একটা package এর মধ্যে একসাথে কতগুলো software development tools এর collection যা নির্দিষ্ট application তৈরীর কাজকে সহজ করে দেয়।
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Firebase SDK- এক বা একের অধিক sign-in methods এর সমন্বয় ঘটিয়ে Authentication System কে handle করার কাজ সহজ করে দেয়।
